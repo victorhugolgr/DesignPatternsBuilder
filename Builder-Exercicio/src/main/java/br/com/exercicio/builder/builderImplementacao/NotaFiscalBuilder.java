@@ -5,22 +5,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import br.com.exercicio.builder.factory.NotaFiscalPfFactory;
 import br.com.exercicio.builder.model.NotaFiscal;
 import br.com.exercicio.builder.model.Produto;
+import br.com.exercicio.builder.model.TipoNF;
 
 public class NotaFiscalBuilder {
 
 	private NotaFiscal instancia;
 
-	public NotaFiscalBuilder() {
-		this.instancia = new NotaFiscal();
-	}
 	
 	public NotaFiscalBuilder comHeader(int nroNF, String data){
 		this.instancia.setNroNF(nroNF);
 		
 		//set data de Emissão através de uma String
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			this.instancia.setDataEmissao(simpleDateFormat.parse(data));
 		} catch (ParseException e) {
@@ -28,6 +27,17 @@ public class NotaFiscalBuilder {
 			e.printStackTrace();
 		}
 		
+		return this;
+	}
+	
+	public NotaFiscalBuilder comPessoaFisica(){
+		this.instancia = new NotaFiscalPfFactory();
+		this.instancia.setTipoNF(TipoNF.FISICA);
+		return this;
+	}
+	
+	public NotaFiscalBuilder comPessoaJuridica(){
+		this.instancia.setTipoNF(TipoNF.JURIDICA);
 		return this;
 	}
 	
