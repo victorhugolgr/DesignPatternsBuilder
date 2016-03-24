@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import br.com.exercicio.builder.factory.NotaFiscalPfFactory;
+import br.com.exercicio.builder.factory.NotaFiscalPjFactory;
 import br.com.exercicio.builder.model.NotaFiscal;
 import br.com.exercicio.builder.model.Produto;
 import br.com.exercicio.builder.model.TipoNF;
@@ -37,6 +38,7 @@ public class NotaFiscalBuilder {
 	}
 	
 	public NotaFiscalBuilder comPessoaJuridica(){
+		this.instancia = new NotaFiscalPjFactory();
 		this.instancia.setTipoNF(TipoNF.JURIDICA);
 		return this;
 	}
